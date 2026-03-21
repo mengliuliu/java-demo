@@ -27,6 +27,7 @@
         <module>spring-demo</module>
         <module>servlet-demo</module>
         <module>springb-demo</module>
+        <module>big-event</module>
     </modules>
     <scm>
         <connection/>
