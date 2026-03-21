@@ -2,10 +2,10 @@ spring:
   application:
     name: springb-demo
   datasource:
-    url: jdbc:hsqldb:file:testdb
-    username: sa
-    password:
-    dirver-class-name: org.hsqldb.jdbc.JDBCDriver
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DATABASE:testdb}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&characterEncoding=utf8&useUnicode=true
+    username: root
+    password: root1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       auto-commit: false
       connection-timeout: 3000
@@ -20,26 +20,14 @@ spring:
 #      exposure:
 #        include: info, health, beans, env, metrics
 
+mybatis:
+  mapper-locations: classpath*:mapper/**/*.xml
+  type-aliases-package: com.mengliu.springbdemo.model
+  configuration:
+    map-underscore-to-camel-case: true
+
 
 server:
   port: ${APP_PORT:8080}
 
----
 
-spring:
-  config:
-    activate:
-      on-profile: test
-
-server:
-  port: 8000
-
----
-
-spring:
-  config:
-    activate:
-      on-profile: production
-
-server:
-  port: 80

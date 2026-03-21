@@ -26,6 +26,7 @@
         <module>ssm-demo</module>
         <module>spring-demo</module>
         <module>servlet-demo</module>
+        <module>springb-demo</module>
     </modules>
     <scm>
         <connection/>
