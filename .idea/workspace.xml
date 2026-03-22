@@ -5,11 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db6083d7-87d6-4ccb-bc1b-b43d7fe3de02" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springb-demo/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/springb-demo/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springb-demo/src/main/java/com/mengliu/springbdemo/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/springb-demo/src/main/java/com/mengliu/springbdemo/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springb-demo/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/springb-demo/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-event/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/big-event/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-event/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/big-event/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/springb-demo.code-workspace" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
