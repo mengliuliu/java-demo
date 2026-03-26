@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,7 @@ import com.mengliu.bigevent.pojo.User;
 import com.mengliu.bigevent.service.UserService;
 import com.mengliu.bigevent.utils.JwtUtil;
 import com.mengliu.bigevent.utils.Md5Util;
+import com.mengliu.bigevent.utils.ThreadLocalUtil;
 
 @RestController
 @RequestMapping("/user")
@@ -44,13 +46,25 @@ public class UserController {
         // 判断密码是否正确
         if (Md5Util.getMD5String(password).equals(user.getPassword())) {
             Map<String, Object> claims = new HashMap<>();
-            claims.put("username", username);
+            claims.put("id", user.getId());
+            claims.put("username", user.getUsername());
             String token = JwtUtil.genToken(claims);
             return Result.success(token);
 
         }
         return Result.error("Invalid password");
 
+    }
+
+    @GetMapping("/userInfo")
+    public Result<User> userInfo() {
+        Map<String, Object> claims = ThreadLocalUtil.get();
+        if (claims == null) {
+            return Result.error("User not found");
+        }
+        String username = (String) claims.get("username");
+        User user = userService.findByUsername(username);
+        return Result.success(user);
     }
 
 }

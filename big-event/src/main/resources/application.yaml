@@ -5,5 +5,9 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/big_event
     username: root
-    password: root1234
+    password: 123457
     driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true

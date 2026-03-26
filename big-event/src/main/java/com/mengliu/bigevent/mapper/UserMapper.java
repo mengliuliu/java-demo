@@ -8,7 +8,7 @@ import com.mengliu.bigevent.pojo.User;
 
 @Mapper
 public interface UserMapper {
-    @Insert("INSERT INTO `user` (username, password, create_time, update_time) VALUES (#{username}, #{password}, NOW(), NOW())")
+    @Insert("INSERT INTO `user` (username, password, create_time, update_time) VALUES (#{username}, #{password}, now(), now())")
     void insert(String username, String password);
 
     @Select("SELECT * FROM `user` WHERE username = #{username}")
