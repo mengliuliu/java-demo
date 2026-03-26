@@ -3,6 +3,7 @@ package com.mengliu.bigevent.mapper;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.mengliu.bigevent.pojo.User;
 
@@ -13,5 +14,8 @@ public interface UserMapper {
 
     @Select("SELECT * FROM `user` WHERE username = #{username}")
     User selectByUsername(String username);
+
+    @Update("UPDATE `user` SET email = #{email}, nickname = #{nickname}, update_time = #{updateTime} WHERE id = #{id}")
+    int update(User user);
 
 }

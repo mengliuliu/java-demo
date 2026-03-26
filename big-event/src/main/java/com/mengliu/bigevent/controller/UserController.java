@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mengliu.bigevent.pojo.Result;
@@ -65,6 +67,22 @@ public class UserController {
         String username = (String) claims.get("username");
         User user = userService.findByUsername(username);
         return Result.success(user);
+    }
+
+    @PutMapping("/update")
+    public Result<?> update(@RequestBody User user) {
+        Map<String, Object> claims = ThreadLocalUtil.get();
+        if (claims == null || claims.get("id") == null) {
+            return Result.error("User not logged in");
+        }
+
+        Integer userId = Integer.valueOf(claims.get("id").toString());
+        user.setId(userId);
+
+        if (userService.update(user)) {
+            return Result.success();
+        }
+        return Result.error("Update failed");
     }
 
 }
