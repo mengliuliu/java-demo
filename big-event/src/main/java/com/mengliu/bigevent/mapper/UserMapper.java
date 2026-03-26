@@ -18,4 +18,7 @@ public interface UserMapper {
     @Update("UPDATE `user` SET email = #{email}, nickname = #{nickname}, update_time = #{updateTime} WHERE id = #{id}")
     int update(User user);
 
+    @Update("UPDATE `user` SET user_pic = #{userPic}, update_time = #{updateTime} WHERE id = #{id}")
+    int updateAvatar(User user);
+
 }

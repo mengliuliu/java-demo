@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.hibernate.validator.constraints.URL;
+
 
 import com.mengliu.bigevent.pojo.Result;
 import com.mengliu.bigevent.pojo.User;
@@ -71,13 +74,7 @@ public class UserController {
 
     @PutMapping("/update")
     public Result<?> update(@RequestBody User user) {
-        Map<String, Object> claims = ThreadLocalUtil.get();
-        if (claims == null || claims.get("id") == null) {
-            return Result.error("User not logged in");
-        }
 
-        Integer userId = Integer.valueOf(claims.get("id").toString());
-        user.setId(userId);
 
         if (userService.update(user)) {
             return Result.success();
@@ -85,4 +82,10 @@ public class UserController {
         return Result.error("Update failed");
     }
 
+    // 修改头像
+    @PatchMapping("/updateAvatar")
+    public Result<?> updateAvatar(@RequestParam @URL String avatar) {
+        userService.updateAvatar( avatar);
+        return Result.success();
+    }
 }
