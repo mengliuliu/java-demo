@@ -3,17 +3,16 @@ package com.mengliu.bigevent.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.hibernate.validator.constraints.URL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.hibernate.validator.constraints.URL;
-
 
 import com.mengliu.bigevent.pojo.Result;
 import com.mengliu.bigevent.pojo.User;
@@ -74,8 +73,6 @@ public class UserController {
 
     @PutMapping("/update")
     public Result<?> update(@RequestBody User user) {
-
-
         if (userService.update(user)) {
             return Result.success();
         }
@@ -85,7 +82,23 @@ public class UserController {
     // 修改头像
     @PatchMapping("/updateAvatar")
     public Result<?> updateAvatar(@RequestParam @URL String avatar) {
-        userService.updateAvatar( avatar);
-        return Result.success();
+        if(userService.updateAvatar(avatar)){
+            return Result.success();
+        }
+        return Result.error("Update avatar failed");
+    }
+
+    // 修改密码
+    @PatchMapping("/updatePassword")
+    public Result<?> updatePassword(@RequestParam String oldPassword, @RequestParam String newPassword) {
+    // public Result<?> updatePassword(@RequestBody Map<String, String> params) {
+    //     String oldPassword = params.get("oldPassword");
+    //     String newPassword = params.get("newPassword");
+        System.out.println(oldPassword);
+        System.out.println(newPassword);
+        if(userService.updatePassword(oldPassword, newPassword)){
+            return Result.success();
+        }
+        return Result.error("Update password failed");
     }
 }

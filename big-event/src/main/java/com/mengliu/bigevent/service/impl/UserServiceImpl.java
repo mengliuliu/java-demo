@@ -2,7 +2,7 @@ package com.mengliu.bigevent.service.impl;
 
 import java.time.LocalDateTime;
 import java.util.Map;
-import com.mengliu.bigevent.pojo.Result;
+
 import org.springframework.stereotype.Service;
 
 import com.mengliu.bigevent.mapper.UserMapper;
@@ -57,5 +57,30 @@ public class UserServiceImpl implements UserService {
         user.setUpdateTime(LocalDateTime.now());
 
         return userMapper.updateAvatar(user) > 0;
+    }
+
+    @Override
+    public boolean updatePassword(String oldPassword, String newPassword) {
+        Map<String, Object> claims = ThreadLocalUtil.get();
+        if (claims == null || claims.get("id") == null) {
+            return false;
+        }
+        // System.out.println(claims);
+        String username = (String) claims.get("username");
+        User user = userMapper.selectByUsername(username);
+        if (user == null) {
+            return false;
+        }
+        if (!Md5Util.getMD5String(oldPassword).equals(user.getPassword())) {
+            // System.out.println(Md5Util.getMD5String(oldPassword));
+            // System.out.println(oldPassword);
+            // System.out.println(user.getPassword());
+            // System.out.println("密码不正确");
+            return false;
+        }
+
+        user.setPassword(Md5Util.getMD5String(newPassword));
+        user.setUpdateTime(LocalDateTime.now());
+        return userMapper.updatePassword(user) > 0;
     }
 }

@@ -11,4 +11,6 @@ public interface UserService {
 
     boolean updateAvatar(String avatar);
 
+    boolean updatePassword(String oldPassword, String newPassword);
+
 }
