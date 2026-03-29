@@ -9,4 +9,6 @@ public interface CategoryService {
 
     List<Category> list();
 
+    Category detail(Integer id);
+
 }

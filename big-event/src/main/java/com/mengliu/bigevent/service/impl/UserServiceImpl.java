@@ -65,17 +65,12 @@ public class UserServiceImpl implements UserService {
         if (claims == null || claims.get("id") == null) {
             return false;
         }
-        // System.out.println(claims);
         String username = (String) claims.get("username");
         User user = userMapper.selectByUsername(username);
         if (user == null) {
             return false;
         }
         if (!Md5Util.getMD5String(oldPassword).equals(user.getPassword())) {
-            // System.out.println(Md5Util.getMD5String(oldPassword));
-            // System.out.println(oldPassword);
-            // System.out.println(user.getPassword());
-            // System.out.println("密码不正确");
             return false;
         }
 

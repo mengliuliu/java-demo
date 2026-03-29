@@ -38,4 +38,9 @@ public class CategoryServiceImpl implements CategoryService {
         System.out.println("userId: " + userId);
         return categoryMapper.selectList(userId);
     }
+
+    @Override
+    public Category detail(Integer id) {
+        return categoryMapper.selectById(id);
+    }
 }

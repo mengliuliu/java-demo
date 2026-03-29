@@ -16,4 +16,7 @@ public interface CategoryMapper {
     @Select("SELECT * FROM `category` WHERE create_user = #{userId}")
     List<Category> selectList(Integer userId);
 
+    @Select("SELECT * FROM `category` WHERE id = #{id}")
+    Category selectById(Integer id);
+
 }

@@ -91,11 +91,6 @@ public class UserController {
     // 修改密码
     @PatchMapping("/updatePassword")
     public Result<?> updatePassword(@RequestParam String oldPassword, @RequestParam String newPassword) {
-    // public Result<?> updatePassword(@RequestBody Map<String, String> params) {
-    //     String oldPassword = params.get("oldPassword");
-    //     String newPassword = params.get("newPassword");
-        System.out.println(oldPassword);
-        System.out.println(newPassword);
         if(userService.updatePassword(oldPassword, newPassword)){
             return Result.success();
         }
