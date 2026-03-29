@@ -1,6 +1,7 @@
 package com.mengliu.bigevent.service.impl;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,14 @@ public class CategoryServiceImpl implements CategoryService {
         category.setCreateUser(userId);
         categoryMapper.insert(category);
         return true;
+    }
+
+
+    @Override
+    public List<Category> list() {
+        Map<String, Object> claims = ThreadLocalUtil.get();
+        Integer userId = (Integer) claims.get("id");
+        System.out.println("userId: " + userId);
+        return categoryMapper.selectList(userId);
     }
 }
