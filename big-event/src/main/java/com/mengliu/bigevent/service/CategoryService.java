@@ -11,4 +11,8 @@ public interface CategoryService {
 
     Category detail(Integer id);
 
+    boolean update(Category category);
+
+    boolean delete(Integer id);
+
 }

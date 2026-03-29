@@ -43,4 +43,16 @@ public class CategoryServiceImpl implements CategoryService {
     public Category detail(Integer id) {
         return categoryMapper.selectById(id);
     }
+
+
+    @Override
+    public boolean update(Category category) {
+        category.setUpdateTime(LocalDateTime.now());
+        return categoryMapper.updateById(category) > 0;
+    }
+
+    @Override
+    public boolean delete(Integer id) {
+        return categoryMapper.delete(id) > 0;
+    }
 }
