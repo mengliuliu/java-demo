@@ -6,10 +6,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mengliu.bigevent.pojo.Result;
-import com.mengliu.bigevent.service.ArticleService; 
+import com.mengliu.bigevent.service.ArticleService;
 import com.mengliu.bigevent.pojo.Article;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import java.util.List;
+import com.mengliu.bigevent.pojo.PageBean;
 
 @RestController
 @RequestMapping("/article")
@@ -26,9 +31,21 @@ public class ArticleController {
     }
 
     @GetMapping()
-    public String list() {
+    public Result<PageBean> list(@RequestParam Integer pageNum, @RequestParam Integer pageSize,
+            @RequestParam Integer categoryId) {
 
-        return "article/list";
+        PageHelper.startPage(pageNum, pageSize);
+
+        List<Article> articles = articleService.list(categoryId);
+        System.out.println("articles: " + articles.size());
+        PageInfo<Article> pageInfo = new PageInfo<>(articles);
+
+        // 1.创建PageBean对象
+        PageBean<Article> pb = new PageBean<>();
+        pb.setTotal(pageInfo.getTotal());
+        pb.setItems(pageInfo.getList());
+
+        return Result.success(pb);
     }
 
 }

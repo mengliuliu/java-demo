@@ -1,6 +1,7 @@
 package com.mengliu.bigevent.service.impl;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,11 @@ public class ArticleServiceImpl implements ArticleService {
         Map<String, Object> claims = ThreadLocalUtil.get();
         article.setCreateUser((Integer) claims.get("id"));
         return articleMapper.insert(article) > 0;
+    }
+
+    @Override
+    public List<Article> list(Integer categoryId) {
+        return articleMapper.selectList(categoryId);
     }
 
 }
